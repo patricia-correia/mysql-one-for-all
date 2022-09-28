@@ -34,7 +34,9 @@ DROP DATABASE IF EXISTS SpotifyClone;
       id_cancoes INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
       cancoes_nome VARCHAR(255) NOT NULL,
       duracao_segundos INT NOT NULL,
+      id_artista INT NOT NULL,
       id_album INT NOT NULL,
+      FOREIGN KEY (id_artista) REFERENCES artistas(id_artista),
       FOREIGN KEY (id_album) REFERENCES albums(id_album)
   ) engine = InnoDB;
 
@@ -44,7 +46,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
       id_cancoes INT NOT NULL,
       FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
       FOREIGN KEY (id_cancoes) REFERENCES cancoes(id_cancoes),
-      CONSTRAINT PRIMARY KEY (id_usuario, id_cancoes)
+      CONSTRAINT PRIMARY KEY(id_usuario, id_cancoes)
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.seguindo_artistas(
@@ -52,7 +54,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
       id_artista INT NOT NULL,
       FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
       FOREIGN KEY (id_artista) REFERENCES artistas(id_artista),
-      CONSTRAINT PRIMARY KEY (id_usuario, id_artista)
+      CONSTRAINT PRIMARY KEY(id_usuario, id_artista)
   ) engine = InnoDB;
 
   INSERT INTO SpotifyClone.planos (plano_nome, plano_valor)
@@ -95,19 +97,19 @@ DROP DATABASE IF EXISTS SpotifyClone;
     ('Somewhere Far Beyond', 2007, 5),
     ('I Put A Spell On You', 2012, 6);
 
-  INSERT INTO SpotifyClone.cancoes (cancoes_nome, duracao_segundos, id_album)
+  INSERT INTO SpotifyClone.cancoes (cancoes_nome, duracao_segundos, id_artista, id_album)
   VALUES
-    ('BREAK MY SOUL', 279, 1),
-    ('VIRGO''S GROOVE', 369, 1),
-    ('ALIEN SUPERSTAR', 116, 1),
-    ('Dont''t Stop Me Now', 203, 2),
-    ('Under Pressure', 152, 3),
-    ('Como Nossos Pais', 105, 4),
-    ('O Medo de Amar é o Medo de Ser Livre', 207, 5),
-    ('Samba em Paris', 267, 6),
-    ('The Bard''s Song' 244, 7),
-    ('Feeling Good', 100, 8);
-  
+    ('BREAK MY SOUL', 279, 1, 1),
+    ('VIRGO’S GROOVE', 369, 1, 1),
+    ('ALIEN SUPERSTAR', 116, 1, 1),
+    ('Don’t Stop Me Now', 203, 2, 2),
+    ('Under Pressure', 152, 2, 3),
+    ('Como Nossos Pais', 105, 3, 4),
+    ('O Medo de Amar é o Medo de Ser Livre', 207, 3, 5),
+    ('Samba em Paris', 267, 4, 6),
+    ('The Bard’s Song', 244, 5, 7),
+    ('Feeling Good', 100, 6, 8);
+
   INSERT INTO SpotifyClone.historico_reproducao (data_reproducao, id_usuario, id_cancoes)
   VALUES
     ('2022-2-28 10:45:55', 1, 8),
