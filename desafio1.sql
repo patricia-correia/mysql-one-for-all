@@ -5,7 +5,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
   CREATE TABLE SpotifyClone.planos(
       id_plano INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
       plano_nome VARCHAR(50) NOT NULL,
-      plano_valor DOUBLE NOT NULL
+      plano_valor NUMERIC(3, 2) NOT NULL
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.usuarios(
@@ -59,7 +59,7 @@ DROP DATABASE IF EXISTS SpotifyClone;
 
   INSERT INTO SpotifyClone.planos (plano_nome, plano_valor)
   VALUES
-    ('gratuito', 0),
+    ('gratuito', 0.00),
     ('familiar', 7.99),
     ('universitário', 5.99),
     ('pessoal', 6.99);
